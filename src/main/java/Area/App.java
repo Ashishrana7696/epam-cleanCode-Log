@@ -1,7 +1,13 @@
 package Area;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.*;
+
 public class App
 {
+
+    private static Logger LOGGER = LogManager.getLogger(App.class);
     private static Scanner in=new Scanner(System.in);
 
     public enum Standards {
@@ -15,23 +21,23 @@ public class App
         String material;
         boolean automation = false;
 
-        System.out.println("Enter the Area : ");
+        LOGGER.info("Enter the Area : ");
         area = in.nextDouble();
-        System.out.println("Choose material Type: ");
+        LOGGER.info("Choose material Type: ");
         material = getMaterialType();
 
         if(material.toLowerCase().equals(Standards.highStandardMaterials.toString().toLowerCase())){
-            System.out.println("Select automation (true/false) : ");
+            LOGGER.info("Select automation (true/false) : ");
             automation = in.nextBoolean();
         }
 
         CalculateInterest calculateInterest = new CalculateInterest();
        if(calculateInterest.getInterest(area,material,automation)<0)
        {
-           System.out.println("Invalid option");
+           LOGGER.info("Invalid option");
        }
        else{
-            System.out.println(calculateInterest.getInterest(area,material,automation));
+           LOGGER.info(calculateInterest.getInterest(area,material,automation));
       }
     }
 
